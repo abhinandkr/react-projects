@@ -1,0 +1,53 @@
+[
+  {
+    "id": 1,
+    "name": "public",
+    "isFolder": true,
+    "children": [
+      {
+        "id": 2,
+        "name": "index.html",
+        "isFolder": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "src",
+    "isFolder": true,
+    "children": [
+      {
+        "id": 4,
+        "name": "components",
+        "isFolder": true,
+        "children": [
+          {
+            "id": 5,
+            "name": "load-more.js",
+            "isFolder": false
+          },
+          {
+            "id": 6,
+            "name": "nav-bar.js",
+            "isFolder": false
+          },
+          {
+            "id": 7,
+            "name": "progress-bar.js",
+            "isFolder": false
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "App.js",
+        "isFolder": false
+      },
+      {
+        "id": 9,
+        "name": "index.js",
+        "isFolder": false
+      }
+    ]
+  }
+]

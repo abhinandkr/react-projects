@@ -1,0 +1,27 @@
+.outer {
+    border: 1px solid black;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 30em;
+}
+
+.inner {
+    background-color: dodgerblue;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.progress-text {
+    color: mediumvioletred;
+    position: relative;
+}
+

@@ -1,0 +1,19 @@
+.container {
+    padding-left: 20px;
+    text-align: left;
+}
+
+.div-name {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.div-folder {
+    cursor: pointer;
+}
+
+.img-icon {
+    width: 12px;
+    object-fit: contain;
+}
