@@ -1,0 +1,5 @@
+button {
+    &.sorted {
+        background-color: lightgreen;
+    }
+}

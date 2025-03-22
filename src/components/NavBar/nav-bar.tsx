@@ -23,6 +23,9 @@ export default function NavBar() {
                 <li>
                     <NavLink className={getClassName} to="file-explorer">File Explorer</NavLink>
                 </li>
+                <li>
+                    <NavLink className={getClassName} to="tab-form">Tab Form</NavLink>
+                </li>
 
             </ul>
         </nav>

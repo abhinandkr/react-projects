@@ -1,0 +1,21 @@
+.tab-bar {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.tab {
+    padding: 12px;
+    border: 1px solid gray;
+
+    &.active {
+        border: 2px solid black;
+    }
+}
+
+.tab-body {
+    border: 1px solid blue;
+    display: flex;
+    height: 20rem;
+    width: 30rem;
+}
