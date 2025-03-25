@@ -6,6 +6,10 @@ import NavBar from "./components/NavBar/nav-bar.tsx";
 import Home from "./pages/home/home.tsx";
 import FileExplorer from "./pages/file-explorer/file-explorer.tsx";
 import TabForm from "./pages/tab-form/tab-form.tsx";
+import DebounceAutocomplete from "./pages/debounce-autocomplete/debounce-autocomplete.tsx";
+import ThrottleResize from "./pages/throttle-resize/throttle-resize.tsx";
+import MemoizedLoadMore from "./pages/load-more/memoized-load-more.tsx";
+import UseReducer from "./pages/use-reducer/use-reducer.tsx";
 
 function App() {
 
@@ -17,6 +21,10 @@ function App() {
                 <Route path={'/progress-bar'} element={<ProgressBarPage/>}/>
                 <Route path={'/file-explorer'} element={<FileExplorer/>}/>
                 <Route path={'/tab-form'} element={<TabForm/>}/>
+                <Route path={'/debounce-autocomplete'} element={<DebounceAutocomplete/>}/>
+                <Route path={'/throttle-resize'} element={<ThrottleResize/>}/>
+                <Route path={'/memoized-load-more'} element={<MemoizedLoadMore/>}/>
+                <Route path={'/use-reducer'} element={<UseReducer/>}/>
                 <Route path={'/'} element={<Home/>}/>
             </Routes>
         </>

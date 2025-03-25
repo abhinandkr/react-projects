@@ -5,7 +5,7 @@ export default function NavBar() {
 
     // @ts-expect-error aaa
     function getClassName({isActive}) {
-        return isActive ? "active-link" : "";
+        return isActive ? "active" : "";
     }
 
     return (
@@ -25,6 +25,18 @@ export default function NavBar() {
                 </li>
                 <li>
                     <NavLink className={getClassName} to="tab-form">Tab Form</NavLink>
+                </li>
+                <li>
+                    <NavLink className={getClassName} to="debounce-autocomplete">Debounce Autocomplete</NavLink>
+                </li>
+                <li>
+                    <NavLink className={getClassName} to="throttle-resize">Throttle Resize</NavLink>
+                </li>
+                <li>
+                    <NavLink className={getClassName} to="memoized-load-more">Memoized Load More</NavLink>
+                </li>
+                <li>
+                    <NavLink className={getClassName} to="use-reducer">Use Reducer</NavLink>
                 </li>
 
             </ul>

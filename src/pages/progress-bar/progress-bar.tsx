@@ -20,28 +20,28 @@ export default function ProgressBarPage() {
     }, [intervalTimer, progress]);
 
     return (
-        <>
-            <ProgressBar progress={progress}/>
-        </>
+        <ProgressBar progress={progress}/>
     );
 }
 
 // @ts-expect-error aaa
 function ProgressBar({progress}) {
-
     return (
-        <>
-            <div className={'outer'}>
-                <div className={'inner'} style={{
-                    transform: `translateX(${progress - 100}%)`
-                }}>
+        <div role="progressbar"
+             aria-valuenow={progress}
+             aria-valuemin={0}
+             aria-valuemax={100}
+             className={'outer'}>
 
-                </div>
-                <div className={'progress-text'}>
-                    {progress}
-                </div>
+            <div className={'inner'} style={{
+                transform: `translateX(${progress - 100}%)`
+            }}>
+
             </div>
+            <div className={'progress-text'}>
+                {progress}
+            </div>
+        </div>
 
-        </>
     );
 }

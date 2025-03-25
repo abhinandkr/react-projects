@@ -41,7 +41,10 @@ export default function FileExplorer() {
                                      src={deleteIcon}
                                      alt={'Delete folder'}/>
                             </div>
-                            {isExpanded[id] && isFolder && children && children.length && <ListItem list={children}/>}
+                            {isExpanded[id] &&
+                                isFolder &&
+                                children?.length &&
+                                <ListItem list={children}/>}
                         </div>
                     );
                 })}
@@ -61,6 +64,9 @@ export default function FileExplorer() {
     function addToTree(list, parentId: number, newName: string) {
         return list.map((item) => {
             const {id, isFolder, children} = item;
+            if (!isFolder) {
+                return item;
+            }
             if (id === parentId) {
                 return {
                     ...item,
@@ -75,13 +81,10 @@ export default function FileExplorer() {
                     ]
                 }
             }
-            if (isFolder && children) {
-                return {
-                    ...item,
-                    children: addToTree(children, parentId, newName),
-                }
+            return {
+                ...item,
+                children: addToTree(children, parentId, newName),           // Search deeper
             }
-            return item;
         });
     }
 
@@ -90,13 +93,13 @@ export default function FileExplorer() {
             .filter((item) => item.id !== parentId)
             .map((item) => {
                 const {isFolder, children} = item;
-                if (isFolder && children) {
-                    return {
-                        ...item,
-                        children: deleteFromTree(children, parentId),
-                    }
+                if (!isFolder) {
+                    return item;
                 }
-                return item;
+                return {
+                    ...item,
+                    children: deleteFromTree(children, parentId),
+                }
             });
     }
 
@@ -104,8 +107,6 @@ export default function FileExplorer() {
     const [data, setData] = useState(jsonData);
 
     return (
-        <div className={'div-file-explorer'}>
-            <ListItem list={data}/>
-        </div>
+        <ListItem list={data}/>
     );
 }
