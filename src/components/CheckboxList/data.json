@@ -1,0 +1,75 @@
+[
+  {
+    "id": 1,
+    "text": "Languages",
+    "checked": false,
+    "children": [
+      {
+        "id": 11,
+        "text": "JavaScript",
+        "checked": false
+      },
+      {
+        "id": 12,
+        "text": "Python",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "Locations",
+    "checked": false,
+    "children": [
+      {
+        "id": 21,
+        "text": "India",
+        "checked": false
+      },
+      {
+        "id": 22,
+        "text": "USA",
+        "checked": false,
+        "children": [
+          {
+            "id": 221,
+            "text": "Los Angeles",
+            "checked": false
+          },
+          {
+            "id": 222,
+            "text": "San Francisco",
+            "checked": false
+          },
+          {
+            "id": 223,
+            "text": "San Jose",
+            "checked": false
+          },
+          {
+            "id": 224,
+            "text": "Santa Clara",
+            "checked": false
+          }
+        ]
+      },
+      {
+        "id": 23,
+        "text": "Uganda",
+        "checked": false
+      },
+      {
+        "id": 24,
+        "text": "Armenia",
+        "checked": false,
+        "children": [
+          {
+            "id": 241,
+            "text": "Yerevan",
+            "checked": false
+          }
+        ]
+      }
+    ]
+  }
+]

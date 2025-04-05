@@ -12,6 +12,7 @@ import MemoizedLoadMore from "./pages/load-more/memoized-load-more.tsx";
 import UseReducer from "./pages/use-reducer/use-reducer.tsx";
 import NewsHeadlines from "./pages/news-headlines/news-headlines.tsx";
 import OtpApp from "./pages/otp-app/otp-app.tsx";
+import CheckboxList from "./components/CheckboxList/checkbox-list.tsx";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                 <Route path={'/use-reducer'} element={<UseReducer/>}/>
                 <Route path={'/news-headlines'} element={<NewsHeadlines/>}/>
                 <Route path={'/otp-app'} element={<OtpApp/>}/>
+                <Route path={'/checkbox-list'} element={<CheckboxList/>}/>
                 <Route path={'/'} element={<Home/>}/>
             </Routes>
         </>

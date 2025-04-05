@@ -42,6 +42,9 @@ export default function NavBar() {
                 <li>
                     <NavLink className={getClassName} to="otp-app">OTP</NavLink>
                 </li>
+                <li>
+                    <NavLink className={getClassName} to="checkbox-list">Checkbox list</NavLink>
+                </li>
 
             </ul>
 

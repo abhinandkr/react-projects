@@ -31,10 +31,11 @@ export default function FileExplorer() {
                                  onClick={() => onExpandClick(id)}>
                                 {isFolder && <div>{isExpanded[id] ? '-' : '+'}</div>}
                                 <div>{name}</div>
-                                {isFolder && <div className={'div-folder'}><img onClick={() => addItemToList(id)}
-                                                                                className={'img-icon'}
-                                                                                src={addIcon}
-                                                                                alt={'Add folder'}/>
+                                {isFolder && <div className={'div-folder'}>
+                                    <img onClick={() => addItemToList(id)}
+                                         className={'img-icon'}
+                                         src={addIcon}
+                                         alt={'Add folder'}/>
                                 </div>}
                                 <img onClick={() => deleteItemFromList(id)}
                                      className={'img-icon'}

@@ -51,7 +51,7 @@ export default function DebounceAutocomplete() {
                     {res ? res?.map(({id, title}) => {
                         return (
                             <li key={id}>
-                                <div onClick={(e) => setInput(title)}
+                                <div onClick={() => setInput(title)}
                                      style={{cursor: 'pointer'}}>{title}</div>
                             </li>);
                     }) : null}

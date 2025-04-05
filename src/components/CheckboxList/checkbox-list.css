@@ -1,0 +1,15 @@
+.section {
+    padding-left: 20px;
+}
+
+
+.div-checkbox-row {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+}
+
+.input-checkbox {
+    width: 20px;
+}
