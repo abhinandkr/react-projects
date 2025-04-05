@@ -10,6 +10,7 @@ export default function NavBar() {
 
     return (
         <nav>
+            <h4>Practice</h4>
             <ul>
                 <li>
                     <NavLink className={getClassName} to="/">Home</NavLink>
@@ -38,8 +39,18 @@ export default function NavBar() {
                 <li>
                     <NavLink className={getClassName} to="use-reducer">Use Reducer</NavLink>
                 </li>
+                <li>
+                    <NavLink className={getClassName} to="otp-app">OTP</NavLink>
+                </li>
 
             </ul>
+
+            {/*<h4>Interview</h4>*/}
+            {/*<ul>*/}
+            {/*    <li>*/}
+            {/*        <NavLink className={getClassName} to="/">Home</NavLink>*/}
+            {/*    </li>*/}
+            {/*</ul>*/}
         </nav>
     );
 }

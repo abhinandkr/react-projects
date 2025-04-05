@@ -20,11 +20,6 @@ export default function Profile({data, onDataChange}) {
         });
     }, [profile]);
 
-    useEffect(() => {
-        // return () => {
-        //     onDataChange('profile', formData);
-        // }
-    }, []);
 
     function handleChange(event) {
         const {name, value} = event.target;
@@ -38,8 +33,8 @@ export default function Profile({data, onDataChange}) {
 
 
     function handleBlur(event) {
-        // const {name, value} = event.target;
-        // onDataChange("profile", {...profile, [name]: value});
+        const {name, value} = event.target;
+        onDataChange("profile", {...profile, [name]: value});
     }
 
     return (
@@ -53,7 +48,7 @@ export default function Profile({data, onDataChange}) {
                        onChange={handleChange} onBlur={handleBlur}/><br/>
                 <label htmlFor="email">Email</label>&nbsp;
                 <input type="text" id="email" name="email" value={formData.email}
-                       onChange={handleChange} onBlur={handleBlur}/><br/>
+                       onChange={handleChange} onBlur={handleBlur} /><br/>
             </form>
         </>
     );

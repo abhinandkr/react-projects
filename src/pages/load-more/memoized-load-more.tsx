@@ -1,31 +1,58 @@
-import {FC, useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import './load-more.css';
+
+type Item = {
+    id: string;
+    title: string;
+    price: number;
+    description: string;
+};
+
+type ItemRowProps = {
+    item: Item;
+    index: number;
+};
+
+function ItemRow(props: ItemRowProps) {
+    const {item, index} = props;
+    const key = `${item.id}-${item.title}`;
+    return (
+        <tr key={key} style={{animationDelay: `${index * 0.05}s`}}>
+            {Object.values(item).map((value, idx) => (
+                <td key={`${key}-${idx}`}>{value}</td>
+            ))}
+        </tr>
+    );
+}
+
+
+const MemoizedItemRow = memo(ItemRow, (prev: ItemRowProps, next: ItemRowProps) => {
+    return prev.item.id === next.item.id && prev.index === next.index;
+});
+
+const columnIds = [{
+    id: 'id',
+    sortable: true,
+}, {
+    id: 'title',
+    sortable: true,
+}, {
+    id: 'price',
+    sortable: true,
+}, {
+    id: 'description',
+    sortable: false,
+}];
+
 
 export default function MemoizedLoadMore() {
     const LIMIT = 10;
     const [skip, setSkip] = useState(0);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Item[]>([]);
     const [isLoadMoreDisabled, setLoadMoreDisabled] = useState(true);
     const [price, setPrice] = useState(0);
-    type ItemRowProps = {
-        id: string;
-        title: string;
-        price: number;
-        description: string;
-    };
-    const columnIds = [{
-        id: 'id',
-        sortable: true,
-    }, {
-        id: 'title',
-        sortable: true,
-    }, {
-        id: 'price',
-        sortable: true,
-    }, {
-        id: 'description',
-        sortable: false,
-    }];
+
+
     const [sort, setSort] = useState({sortBy: columnIds[0].id, order: 'asc'});
 
     async function getData() {
@@ -43,7 +70,6 @@ export default function MemoizedLoadMore() {
     useEffect(() => {
         setLoadMoreDisabled(true);
         getData().then((data) => {
-            // @ts-expect-error type
             setData(prevData => [...prevData, ...data.products]);
         }).finally(() => {
             setLoadMoreDisabled(false);
@@ -65,7 +91,7 @@ export default function MemoizedLoadMore() {
 
     function filterPrice() {
         getData().then(() => {
-            setData(data => data.filter((d) => d['price'] <= price));
+            setData(prevData => prevData.filter((d) => d['price'] <= price));
         });
     }
 
@@ -83,25 +109,6 @@ export default function MemoizedLoadMore() {
             };
         });
     }
-
-    const ItemRow: FC<{item: ItemRowProps, index: number}> = (props) => {
-        const {item, index} = props;
-        const key = `${item['id']}-${item['title']}`;
-        console.log(`ItemRow rendered: ${key}`);
-        return (
-            <tr key={key} style={{animationDelay: `${index * 0.05}s`}}>
-                {columnIds.map(({id}, idx: number) => {
-                    // @ts-expect-error aaa
-                    const columnValue = item[id];
-                    return (
-                        <td key={`${item['id']}-${item['title']}-${idx}`}>
-                            {columnValue}
-                        </td>
-                    );
-                })}
-            </tr>
-        );
-    };
 
     return (
         <>
@@ -134,9 +141,8 @@ export default function MemoizedLoadMore() {
                 </tr>
                 </thead>
                 <tbody>
-                {data.map((item: ItemRowProps, index: number) => {
-                    const key = `${item['id']}-${item['title']}`;
-                    return <ItemRow item={item} index={index}/>;
+                {data.map((item, index) => {
+                    return <MemoizedItemRow key={`${item.id}-${item.title}`} item={item} index={index}/>;
                 })}
                 </tbody>
             </table>

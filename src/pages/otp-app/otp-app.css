@@ -1,0 +1,10 @@
+.section-input {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+}
+
+.input-digit {
+    width: 30px;
+    height: 30px;
+}

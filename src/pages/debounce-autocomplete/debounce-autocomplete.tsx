@@ -24,6 +24,7 @@ export default function DebounceAutocomplete() {
         let timer: number;
         // @ts-expect-error aaa
         return function (args) {
+            // Need to cancel the old timer
             clearTimeout(timer);
             timer = setTimeout(() => {
                 fn(args).then(setRes);

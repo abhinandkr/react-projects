@@ -10,6 +10,8 @@ import DebounceAutocomplete from "./pages/debounce-autocomplete/debounce-autocom
 import ThrottleResize from "./pages/throttle-resize/throttle-resize.tsx";
 import MemoizedLoadMore from "./pages/load-more/memoized-load-more.tsx";
 import UseReducer from "./pages/use-reducer/use-reducer.tsx";
+import NewsHeadlines from "./pages/news-headlines/news-headlines.tsx";
+import OtpApp from "./pages/otp-app/otp-app.tsx";
 
 function App() {
 
@@ -25,6 +27,8 @@ function App() {
                 <Route path={'/throttle-resize'} element={<ThrottleResize/>}/>
                 <Route path={'/memoized-load-more'} element={<MemoizedLoadMore/>}/>
                 <Route path={'/use-reducer'} element={<UseReducer/>}/>
+                <Route path={'/news-headlines'} element={<NewsHeadlines/>}/>
+                <Route path={'/otp-app'} element={<OtpApp/>}/>
                 <Route path={'/'} element={<Home/>}/>
             </Routes>
         </>

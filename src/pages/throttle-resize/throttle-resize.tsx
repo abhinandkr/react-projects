@@ -7,16 +7,14 @@ export default function ThrottleResize() {
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     function throttle(fn: Function, delay: number) {
-        let timer: number;
-        let flag: boolean = true;
+        let ready: boolean = true;
         // @ts-expect-error aaa
         return function (args) {
-            if (flag) {
+            if (ready) {
                 fn(args);
-                flag = false;
-                clearTimeout(timer);
-                timer = setTimeout(() => {
-                    flag = true;
+                ready = false;
+                setTimeout(() => {
+                    ready = true;
                 }, delay);
             }
         };

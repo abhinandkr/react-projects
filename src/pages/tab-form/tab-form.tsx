@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import './tab-bar.css';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Profile from "./tabs/Profile.tsx";
 import Interests from "./tabs/Interests.tsx";
 import Settings from "./tabs/Settings.tsx";
@@ -48,17 +48,13 @@ export default function TabForm() {
         setActiveTab(toIndex);
     }
 
-    useEffect(() => {
-        console.log('main data', data);
-    }, [data]);
-
     function TabBar() {
         return (
             <div className={'tab-bar'}>
                 {tabs.map((tab, index) => {
                     return (
                         <div key={tab.id} className={`tab ${(tab.id === activeTab) ? 'active' : ''}`}
-                             onClick={() => handleTabChange(index, data[tabs[activeTab].name.toLowerCase()])}
+                             onClick={() => handleTabClick(activeTab, index, data[tabs[activeTab].name.toLowerCase()])}
                         >
                             {tab.name}
                         </div>
@@ -77,37 +73,27 @@ export default function TabForm() {
         );
     }
 
-    function onPrevClick() {
-        setActiveTab(prev => {
-            if (prev - 1 < 0) {
-                return tabs.length - 1;
-            }
-            return (prev - 1) % tabs.length;
-        });
-    }
+    function NavigationButtons() {
+        return (
+            <span>
+                 <button disabled={activeTab <= 0}
+                         onClick={() => handleTabChange(-1, data[tabs[activeTab].name.toLowerCase()])}>
+                     Prev
+                 </button>
 
-    function onNextClick() {
-        setActiveTab(prev => {
-            return (prev + 1) % tabs.length;
-        });
+                <button disabled={activeTab >= tabs.length - 1}
+                        onClick={() => handleTabChange(1, data[tabs[activeTab].name.toLowerCase()])}>
+                    Next
+                </button>
+            </span>
+        );
     }
 
     return (
         <>
             <TabBar/>
             <TabBody/>
-            <span>
-                 {activeTab > 0 && (
-                     <button onClick={() => handleTabChange(-1, data[tabs[activeTab].name.toLowerCase()])}>
-                         Prev
-                     </button>
-                 )}
-                {activeTab < tabs.length - 1 && (
-                    <button onClick={() => handleTabChange(1, data[tabs[activeTab].name.toLowerCase()])}>
-                        Next
-                    </button>
-                )}
-            </span>
+            <NavigationButtons/>
         </>
     );
 }
