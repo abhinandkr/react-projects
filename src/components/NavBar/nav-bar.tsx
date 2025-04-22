@@ -8,45 +8,34 @@ export default function NavBar() {
         return isActive ? "active" : "";
     }
 
+    const routes = [
+        {to: "/", label: "Home"},
+        {to: "load-more", label: "Load More"},
+        {to: "progress-bar", label: "Progress Bar"},
+        {to: "file-explorer", label: "File Explorer"},
+        {to: "tab-form", label: "Tab Form"},
+        {to: "debounce-autocomplete", label: "Debounce Autocomplete"},
+        {to: "throttle-resize", label: "Throttle Resize"},
+        {to: "memoized-load-more", label: "Memoized Load More"},
+        {to: "use-reducer", label: "Use Reducer"},
+        {to: "otp-app", label: "OTP"},
+        {to: "checkbox-list", label: "Checkbox list"},
+        {to: "context", label: "Context"},
+        {to: 'render-prop', label: 'Render prop'}
+    ];
+
     return (
         <nav>
             <h4>Practice</h4>
-            <ul>
-                <li>
-                    <NavLink className={getClassName} to="/">Home</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="load-more">Load More</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="progress-bar">Progress Bar</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="file-explorer">File Explorer</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="tab-form">Tab Form</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="debounce-autocomplete">Debounce Autocomplete</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="throttle-resize">Throttle Resize</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="memoized-load-more">Memoized Load More</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="use-reducer">Use Reducer</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="otp-app">OTP</NavLink>
-                </li>
-                <li>
-                    <NavLink className={getClassName} to="checkbox-list">Checkbox list</NavLink>
-                </li>
-
-            </ul>
+            <div className={'div-list-wrapper'}>
+                {routes.map(function (route) {
+                    return (
+                        <div className={'div-list-item'} key={route.to}>
+                            <NavLink className={getClassName} to={route.to}>{route.label}</NavLink>
+                        </div>
+                    );
+                })}
+            </div>
 
             {/*<h4>Interview</h4>*/}
             {/*<ul>*/}

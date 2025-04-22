@@ -1,5 +1,4 @@
-import * as React from "react";
-import {ChangeEvent, useEffect, useRef, useState} from "react";
+import {ChangeEvent, KeyboardEvent, useEffect, useRef, useState} from "react";
 import './otp-app.css';
 
 export default function OtpApp() {
@@ -18,11 +17,13 @@ export default function OtpApp() {
             arr[index] = value.slice(-1);
             return arr;
         });
-        value && refArr.current[index + 1]?.focus();
+        if (value && (index + 1) < 6) {
+            refArr.current[index + 1]?.focus();
+        }
     }
 
-    function handleKeyDown(e: React.KeyboardEvent<HTMLInputElement>, index: number) {
-        if (!e.currentTarget.value && e.key === 'Backspace') {
+    function handleKeyDown(e: KeyboardEvent<HTMLInputElement>, index: number) {
+        if (!e.currentTarget.value && e.key === 'Backspace' && index - 1 >= 0) {
             refArr.current[index - 1]?.focus();
         }
     }

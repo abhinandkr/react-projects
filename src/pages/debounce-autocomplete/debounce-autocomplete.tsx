@@ -1,5 +1,6 @@
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import './debounce-autocomplete.css';
+import {useDebounce} from "../../hooks/useDebounce.ts";
 
 export default function DebounceAutocomplete() {
     const [input, setInput] = useState('');
@@ -19,25 +20,11 @@ export default function DebounceAutocomplete() {
         });
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-    function debounce(fn: Function, delay: number) {
-        let timer: number;
-        // @ts-expect-error aaa
-        return function (args) {
-            // Need to cancel the old timer
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                fn(args).then(setRes);
-            }, delay);
-        };
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const getDataDebounce = useCallback(debounce(getData, 500), []);
+    const fetchData = useDebounce((query: string) => getData(query).then(setRes), 500);
 
     useEffect(() => {
-        getDataDebounce(input);
-    }, [input, getDataDebounce]);
+        fetchData(input);
+    }, [input, fetchData]);
 
     return (
         <div className="debounce-autocomplete" style={{display: 'flex', flexDirection: 'column', gap: 4}}>

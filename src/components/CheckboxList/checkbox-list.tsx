@@ -5,8 +5,9 @@ import './checkbox-list.css';
 export interface ListItem {
     id: number;
     text: string;
-    children?: ListItem[] | undefined;
+    children?: ListItem[];
     checked: boolean;
+    parent?: ListItem;
 }
 
 export default function CheckboxList() {
@@ -20,62 +21,74 @@ export default function CheckboxList() {
         }));
     }
 
-    function checkItemInList(listItems: ListItem[] | undefined, parentId: number, ancestorChecked: boolean = false): ListItem[] | undefined {
+    function changeParentStatus(listItem: ListItem) {
+        for (let p = listItem?.parent; p !== null && p !== undefined; p = p?.parent) {
+            // Recalculate parent's checked based on its children
+            if (p.children) {
+                p.checked = p.children.some(function (child: ListItem) {
+                    return child.checked;
+                });
+            }
+        }
+    }
+
+    function checkItemInList(listItems: ListItem[] | undefined, checkboxId: number): ListItem[] | undefined {
         return listItems?.map((item: ListItem) => {
             const {id, checked} = item;
-            let {children} = item;
-            if (id === parentId) {
-                if (children?.length) {
-                    children = children.map((c) => {
-                        return {
-                            ...c,
-                            checked: !checked,
-                            children: checkItemInList(c.children, parentId, !checked),
-                        };
-                    });
-                }
-                return {
-                    ...item,
-                    checked: !checked,
-                    children
-                }
+            const {children} = item;
+            if (id === checkboxId) {
+
+                item.checked = !checked;
+                item.children = applyToAllDescendants(children, !checked);
+                changeParentStatus(item);
+                return item;
             }
-                // else if (children?.find((c: ListItem) => c.id === parentId)) {
-                //     const allChildrenChecked = children?.every((c: ListItem) => c.checked);
-                //     const allChildrenUnchecked = children?.every((c: ListItem) => !c.checked);
-                //     let c = ancestorChecked;
-                //     if (allChildrenChecked) {
-                //         c = false;
-                //     }
-                //     // else if (allChildrenUnchecked) {
-                //     //     c = true;
-                //     // }
-                //     return {
-                //         ...item,
-                //         checked: c,
-                //         children: checkItemInList(children, parentId),
-                //     };
-            // }
-            else {
-                return {
-                    ...item,
-                    children: checkItemInList(children, parentId),
-                };
-            }
+            return {
+                ...item,
+                children: checkItemInList(children, checkboxId),
+            };
+
         });
     }
 
     function handleCheckboxClick(e: ChangeEvent<HTMLInputElement>) {
         const id = Number(e.target.value);
-        setData((prev) => checkItemInList(prev, id));
+        const newList = checkItemInList(data, id);
+        setData(newList);
+    }
+
+    function setParent(listItems: ListItem[] | undefined, parent?: ListItem): ListItem[] | undefined {
+        if (!listItems) {
+            return listItems;
+        }
+        return listItems.map(function (listItem: ListItem) {
+            const currentItem: ListItem = {
+                ...listItem,
+                parent: parent,
+                children: undefined  // We'll assign children after recursion
+            };
+
+            const updatedChildren = listItem.children
+                ? setParent(listItem.children, currentItem)
+                : listItem.children;
+
+            return {
+                ...currentItem,
+                children: updatedChildren
+            };
+        });
     }
 
     useEffect(() => {
+        const withParents = setParent(data);
+        setData(withParents);
+    }, []);
 
-    }, [data]);
 
-
-    function ListItem({tree}: { tree: ListItem[] }) {
+    function ListItem({tree}: { tree: ListItem[] | undefined }) {
+        if (!tree) {
+            return null;
+        }
         return (
             <div className={'section'}>
                 {

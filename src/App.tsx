@@ -3,7 +3,6 @@ import {Route, Routes} from "react-router-dom";
 import LoadMore from "./pages/load-more/load-more.tsx";
 import ProgressBarPage from "./pages/progress-bar/progress-bar.tsx";
 import NavBar from "./components/NavBar/nav-bar.tsx";
-import Home from "./pages/home/home.tsx";
 import FileExplorer from "./pages/file-explorer/file-explorer.tsx";
 import TabForm from "./pages/tab-form/tab-form.tsx";
 import DebounceAutocomplete from "./pages/debounce-autocomplete/debounce-autocomplete.tsx";
@@ -13,11 +12,22 @@ import UseReducer from "./pages/use-reducer/use-reducer.tsx";
 import NewsHeadlines from "./pages/news-headlines/news-headlines.tsx";
 import OtpApp from "./pages/otp-app/otp-app.tsx";
 import CheckboxList from "./components/CheckboxList/checkbox-list.tsx";
+import Context from "./pages/context/context.tsx";
+import RenderProp from "./pages/custom-hooks/render-prop/render-prop.tsx";
+
+function Home() {
+    return (
+        <>
+            React examples
+        </>
+    );
+}
+
 
 function App() {
 
     return (
-        <>
+        <div className={'div-app'}>
             <NavBar/>
             <Routes>
                 <Route path={'/load-more'} element={<LoadMore/>}/>
@@ -31,9 +41,12 @@ function App() {
                 <Route path={'/news-headlines'} element={<NewsHeadlines/>}/>
                 <Route path={'/otp-app'} element={<OtpApp/>}/>
                 <Route path={'/checkbox-list'} element={<CheckboxList/>}/>
+                <Route path={'/context'} element={<Context/>}/>
+                {/*<Route path={'/custom-hooks/*'} element={<CustomHooks/>}/>*/}
+                <Route path={'/render-prop'} element={<RenderProp/>}/>
                 <Route path={'/'} element={<Home/>}/>
             </Routes>
-        </>
+        </div>
     )
 }
 

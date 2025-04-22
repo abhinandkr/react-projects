@@ -1,4 +1,4 @@
-import {useReducer} from "react";
+import {useEffect, useReducer} from "react";
 
 type WarehouseState = {
     name: string;
@@ -27,8 +27,28 @@ function warehouseReducer(state: WarehouseState, action: any) {
     }
 }
 
+// Redux DevTools Extension Support
+const devtools =
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__.connect({name: 'FormStore'});
+
 export default function UseReducer() {
     const [state, dispatch] = useReducer(warehouseReducer, DEFAULT_WAREHOUSE_STATE);
+
+
+    // Sync with Redux DevTools
+    useEffect(() => {
+        if (devtools) {
+            devtools.init(DEFAULT_WAREHOUSE_STATE);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (devtools) {
+            devtools.send({ type: 'UPDATE' }, state);
+        }
+    }, [state]);
+
     return (
         <div>
             <p>{state.name}</p>
