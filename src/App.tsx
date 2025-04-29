@@ -14,6 +14,7 @@ import OtpApp from "./pages/otp-app/otp-app.tsx";
 import CheckboxList from "./components/CheckboxList/checkbox-list.tsx";
 import Context from "./pages/context/context.tsx";
 import RenderProp from "./pages/custom-hooks/render-prop/render-prop.tsx";
+import TodoList from "./pages/todo-list/todo-list.tsx";
 
 function Home() {
     return (
@@ -44,6 +45,7 @@ function App() {
                 <Route path={'/context'} element={<Context/>}/>
                 {/*<Route path={'/custom-hooks/*'} element={<CustomHooks/>}/>*/}
                 <Route path={'/render-prop'} element={<RenderProp/>}/>
+                <Route path={'/todo-list'} element={<TodoList/>}/>
                 <Route path={'/'} element={<Home/>}/>
             </Routes>
         </div>

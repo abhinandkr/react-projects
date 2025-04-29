@@ -21,7 +21,8 @@ export default function NavBar() {
         {to: "otp-app", label: "OTP"},
         {to: "checkbox-list", label: "Checkbox list"},
         {to: "context", label: "Context"},
-        {to: 'render-prop', label: 'Render prop'}
+        {to: 'render-prop', label: 'Render prop'},
+        {to: 'todo-list', label: 'Todo list'}
     ];
 
     return (

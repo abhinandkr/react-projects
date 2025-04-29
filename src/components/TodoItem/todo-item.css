@@ -1,0 +1,36 @@
+.div-todo-item {
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+    width: 35em;
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.div-left {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.div-left input[type='checkbox'] {
+    width: 1em;
+}
+
+.span-text {
+    width: 20em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+.span-date {
+    font-size: 0.9em;
+}
